@@ -19,6 +19,8 @@ AMPLIFY_APP_ID=$(jq -r ".$APP_ENV.awscloudformation.AmplifyAppId" amplify/team-p
 allowlist=(
   AWS_ACCESS_KEY_ID
   AWS_SECRET_ACCESS_KEY
+  VPC_AWS_REGION
+  VPC_LAMBDA_FUNCTION_NAME
 )
 
 for key in "${allowlist[@]}"; do
