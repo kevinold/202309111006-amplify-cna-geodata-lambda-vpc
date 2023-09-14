@@ -4,7 +4,7 @@
 APP_ENV=dev
 
 # Load .env into environment
-export $(cat .env | grep -v '^#' | xargs) 
+export $(cat .env.local | grep -v '^#' | xargs) 
 
 # Check if AMPLIFY_APP_ID already exists and if so, exit because we are running in CI/CD
 if [ ! -z "$AMPLIFY_APP_ID" ]; then
