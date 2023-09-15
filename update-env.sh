@@ -9,7 +9,7 @@ allowlist=(
 )
 
 # Get the app environment from amplify/.config/local-env-info.json
-$APP_ENV=$(jq -r '.envName' amplify/.config/local-env-info.json)
+APP_ENV=$(jq -r '.envName' amplify/.config/local-env-info.json)
 
 for key in "${allowlist[@]}"; do
   echo "$key=$(aws ssm get-parameter --name "/amplify/$AWS_APP_ID/$APP_ENV/nextAPI/$key" --with-decryption | jq '.Parameter.Value')" >> .env

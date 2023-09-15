@@ -15,7 +15,7 @@ if [ ! -z "$AMPLIFY_APP_ID" ]; then
 fi
 
 # Get the app environment from amplify/.config/local-env-info.json
-$APP_ENV=$(jq -r '.envName' amplify/.config/local-env-info.json)
+APP_ENV=$(jq -r '.envName' amplify/.config/local-env-info.json)
 
 # If we are not running in CI/CD, get AmplifyAppId from amplify/team-provider-info.json
 AMPLIFY_APP_ID=$(jq -r ".$APP_ENV.awscloudformation.AmplifyAppId" amplify/team-provider-info.json)
