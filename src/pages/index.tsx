@@ -9,8 +9,13 @@ import {
 import { API } from "aws-amplify";
 import { useEffect, useState } from "react";
 
+type Country = {
+  name: string;
+  states: string[];
+};
+
 export default function Home() {
-  const [geoData, setGeoData] = useState([]);
+  const [geoData, setGeoData] = useState<Country[]>([]);
 
   async function fetchGeoData() {
     const response = await API.get("geoDataApi", "/api/getGeoData", {});
