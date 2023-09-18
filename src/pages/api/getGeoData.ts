@@ -1,10 +1,6 @@
 import { Lambda } from "aws-sdk";
 import { NextApiRequest, NextApiResponse } from "next";
 
-console.log("Credentials");
-console.log(process.env.AWS_ACCESS_KEY_ID);
-console.log(process.env.AWS_SECRET_ACCESS_KEY);
-
 const lambda = new Lambda({
   region: process.env.VPC_AWS_REGION,
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
