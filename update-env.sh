@@ -9,6 +9,7 @@ allowlist=(
 )
 
 TEST_PARAM=$(aws ssm get-parameter --name "/amplify/d36g0ambyeydeu/main/test" --with-decryption | jq '.Parameter.Value')
+echo $TEST_PARAM
 
 # Get the name of the current branch
 # APP_BRANCH=$(git rev-parse --abbrev-ref HEAD)
