@@ -7,6 +7,7 @@ frontend:
         - yum -y install jq
         - jq --version
         - echo "secrets $secrets"
+        - echo "Env printenv"
         - npm ci
     build:
       commands:
