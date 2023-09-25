@@ -8,6 +8,8 @@ allowlist=(
   VPC_LAMBDA_FUNCTION_NAME
 )
 
+echo TEST_PARAM=aws ssm get-parameter --name "/amplify/d36g0ambyeydeu/main/test" --with-decryption | jq '.Parameter.Value'
+
 # Get the name of the current branch
 APP_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
