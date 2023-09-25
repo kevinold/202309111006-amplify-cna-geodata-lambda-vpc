@@ -6,8 +6,7 @@ frontend:
       commands:
         - yum -y install jq
         - jq --version
-        - echo "secrets:"
-        - echo "$secrets"
+        - echo "secrets $secrets"
         - npm ci
     build:
       commands:
