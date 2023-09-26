@@ -20,5 +20,5 @@ AWS_ACCESS_KEY_ID=$(aws configure get aws_access_key_id --profile $AWS_PROFILE)
 AWS_SECRET_ACCESS_KEY=$(aws configure get aws_secret_access_key --profile $AWS_PROFILE)
 
 for key in "${allowlist[@]}"; do
-  aws ssm put-parameter --name "/amplify/$AWS_APP_ID/$APP_BRANCH/nextAPI/$key" --value "${!key}" --type SecureString --overwrite
+  aws ssm put-parameter --name "/amplify/$AWS_APP_ID/$APP_BRANCH/$key" --value "${!key}" --type SecureString --overwrite
 done
