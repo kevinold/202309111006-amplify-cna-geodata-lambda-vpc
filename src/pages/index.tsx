@@ -5,8 +5,9 @@ import {
   TableCell,
   TableHead,
   TableRow,
+  View,
 } from "@aws-amplify/ui-react";
-import { API } from "aws-amplify";
+import axios from "axios";
 import { useEffect, useState } from "react";
 
 type Country = {
@@ -18,38 +19,46 @@ export default function Home() {
   const [geoData, setGeoData] = useState<Country[]>([]);
 
   async function fetchGeoData() {
-    const response = await API.get("geoDataApi", "/api/getGeoData", {});
-    setGeoData(response);
+    const response = await axios.get("/api/getGeoData");
+    const payload = JSON.parse(response.data.data.Payload);
+    const body = JSON.parse(payload.body);
+    setGeoData(body);
   }
 
   useEffect(() => {
     fetchGeoData();
   }, []);
   return (
-    <div>
-      <Heading level={3}>Countries and States</Heading>
+    <View padding="1rem">
+      <Heading level={2} marginBottom={25}>
+        Countries and States
+      </Heading>
+      <br />
 
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell as="header">Country</TableCell>
-            <TableCell as="header">States</TableCell>
-          </TableRow>
-        </TableHead>
-
-        <TableBody>
-          {geoData.map((country) => (
-            <TableRow key={country.name}>
-              <TableCell>{country.name}</TableCell>
-              <TableCell>
-                {country.states.map((state) => (
-                  <div key={state}>{state}</div>
-                ))}
-              </TableCell>
+      {geoData.length === 0 && <div>Loading...</div>}
+      {geoData.length > 0 && (
+        <Table width={500}>
+          <TableHead>
+            <TableRow>
+              <TableCell as="th">Country</TableCell>
+              <TableCell as="th">States</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </div>
+          </TableHead>
+
+          <TableBody>
+            {geoData.map((country) => (
+              <TableRow key={country.name}>
+                <TableCell>{country.name}</TableCell>
+                <TableCell>
+                  {country.states.map((state) => (
+                    <div key={state}>{state}</div>
+                  ))}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      )}
+    </View>
   );
 }
