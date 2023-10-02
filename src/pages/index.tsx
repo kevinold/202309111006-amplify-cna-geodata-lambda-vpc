@@ -7,7 +7,6 @@ import {
   TableRow,
   View,
 } from "@aws-amplify/ui-react";
-import axios from "axios";
 import { useEffect, useState } from "react";
 
 type Country = {
@@ -19,10 +18,13 @@ export default function Home() {
   const [geoData, setGeoData] = useState<Country[]>([]);
 
   async function fetchGeoData() {
-    const response = await axios.get("/api/getGeoData");
-    const payload = JSON.parse(response.data.data.Payload);
-    const body = JSON.parse(payload.body);
-    setGeoData(body);
+    const response = await fetch("/api/getGeoData")
+      .then((res) => res.json())
+      .then((data) => {
+        const payload = JSON.parse(data.data.Payload);
+        const body = JSON.parse(payload.body);
+        setGeoData(body);
+      });
   }
 
   useEffect(() => {
